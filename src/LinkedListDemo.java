@@ -197,6 +197,16 @@ public class LinkedListDemo<E> implements Iterable<E>{
 		return -1;
 	}
 	
+	public boolean contains(E val) {
+		Node node = first;
+		while (node != null) {
+			if (node.val.equals(val))
+				return true;
+			node = node.next;
+		}
+		return false;
+	}
+	
 	public int size() {
 		return count;
 	}
