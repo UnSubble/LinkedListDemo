@@ -103,8 +103,13 @@ public class LinkedListDemo<E> implements Iterable<E>{
 	}
 	
 	public void addFirst(E val) {
+		if (count == 0) {
+			setFirstElement(val);
+			return;
+		}
 		Node temp = new Node(val);
-		first.prev = temp;
+		if (first.prev != null)
+			first.prev = temp;
 		temp.next = first;
 		first = temp;
 		count++;
@@ -115,6 +120,26 @@ public class LinkedListDemo<E> implements Iterable<E>{
 		last.next = temp;
 		temp.prev = last;
 		setCountAndLast(temp, 1);
+	}
+	
+	public void add(int index, E val) {
+		if (index == 0) {
+			addFirst(val);
+			return;
+		} else if (index == count) {
+			addLast(val);
+			return;
+		}
+		Node node = first;
+		while (index-- > 0) {
+			node = node.next;
+		}
+		Node toAdd = new Node(val);
+		Node temp = node.prev;
+		node.prev.next = toAdd;
+		node.prev = toAdd;
+		toAdd.next = node;
+		toAdd.prev = temp;
 	}
 	
 	public void removeFirst() {
