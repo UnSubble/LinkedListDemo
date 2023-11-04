@@ -213,6 +213,17 @@ public class LinkedListDemo<E> implements Iterable<E>{
 		return last.val;
 	}
 	
+	public void clear() {
+		while (first != null) {
+			first.prev = null;
+			Node temp = first;
+			first = first.next;
+			temp.next = null;
+		}
+		last = null;
+		count = 0;
+	}
+	
 	@Override
 	public Iterator<E> iterator() {
 		return new ListIterator(first);
